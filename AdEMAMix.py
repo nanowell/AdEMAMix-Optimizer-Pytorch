@@ -9,12 +9,8 @@ class AdEMAMix(Optimizer):
             raise ValueError(f"Invalid learning rate: {lr}")
         if not 0.0 <= eps:
             raise ValueError(f"Invalid epsilon value: {eps}")
-        if not 0.0 <= betas[0] < 1.0:
-            raise ValueError(f"Invalid beta parameter at index 0: {betas[0]}")
-        if not 0.0 <= betas[1] < 1.0:
-            raise ValueError(f"Invalid beta parameter at index 1: {betas[1]}")
-        if not 0.0 <= betas[2] < 1.0:
-            raise ValueError(f"Invalid beta parameter at index 2: {betas[2]}")
+        assert len(betas) == 3, f"Invalid beta parameters: {betas}, expected 3"
+        assert all(0.0 <= beta < 1.0 for beta in betas), f"Invalid beta parameters: {betas}"
         if not 0.0 <= weight_decay:
             raise ValueError(f"Invalid weight_decay value: {weight_decay}")
         
